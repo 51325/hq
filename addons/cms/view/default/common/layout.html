@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class=""> <!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>{cms:config name="cms.title"/} - {cms:config name="cms.sitename"/}</title>
+    <meta name="keywords" content="{cms:config name='cms.keywords'/}"/>
+    <meta name="description" content="{cms:config name='cms.description'/}"/>
+
+    <link rel="shortcut icon" href="__CDN__/assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" media="screen" href="__CDN__/assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" media="screen" href="__CDN__/assets/libs/nice-validator/dist/jquery.validator.css"/>
+    <link rel="stylesheet" media="screen" href="__CDN__/assets/libs/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" media="screen" href="__CDN__/assets/libs/fastadmin-layer/dist/theme/default/layer.css"/>
+    <link rel="stylesheet" media="screen" href="__ADDON__/css/swiper.min.css">
+    <link rel="stylesheet" media="screen" href="__ADDON__/css/common.css?v={cms:config name='site.version'/}"/>
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1104524_z1zcv22ej09.css">
+	
+	
+    <link rel="stylesheet" media="screen" href="__CDN__/assets/css/dcm.css"/>
+
+    {__STYLE__}
+
+    <!--[if lt IE 9]>
+    <script src="__CDN__/libs/html5shiv.js"></script>
+    <script src="__CDN__/libs/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="group-page">
+
+
+<header class="header">
+
+	<div class="head-a">
+	   <div class="head">
+	    <div class="col-md-3">
+	    </div>
+		<div class="col-md-2">
+		  <a href="{cms:config name='cms.indexurl'/}" class="logo">
+			<img src="__CDN__/assets/img/top/logo.png">
+		  </a>
+		</div>
+		<div class="col-md-7">
+		  <span class="logo2">
+			<img src="__CDN__/assets/img/top/logo2.png">
+		  </span>
+		</div>
+	   </div>
+	</div>
+    <!-- S 导航 -->
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+			<div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{cms:config name='cms.indexurl'/}"><img src="__CDN__/assets/img/top/logo2020.png" width="180" alt=""></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <!--如果你需要自定义NAV,可使用channellist标签来完成,这里只设置了2级,如果显示无限级,请使用cms:nav标签-->
+                    {cms:channellist id="nav" type="top" condition="1=isnav"}
+                    <!--判断是否有子级或高亮当前栏目-->
+                    <li class="{if $nav->is_active} active{/if}">
+                        <a href="{$nav.url}" >{$nav.name}</a>
+                    </li>
+                    {/cms:channellist}
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <!-- E 导航 -->
+
+</header>
+
+{__CONTENT__}
+
+<footer>
+    <div class="container-fluid" id="footer">
+        <div class="container">
+            <div class="row footer-inner">
+                <div class="col-md-9 col-sm-9">
+					<div class="row">
+						{cms:channellist id="bottom" type="top"}
+							{neq name="$bottom.id" value="1"}
+								<div class="col-xs-2">	
+									<ul class="links">
+										<li class="footer-links-title"><a href="{$bottom.url}">{$bottom.name}</a></li>
+										{cms:channellist id="details" type="son"  typeid="$bottom.id"}
+											<li><a href="{$details.url}">{$details.name}</a></li>
+										{/cms:channellist}
+									</ul>
+								</div>
+							{/neq}
+						{/cms:channellist}
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-3">
+					<div class="col-xs-8">
+						<div class="kefu1">
+						  <div class="hang1">客服专线</div>
+						  <div class="hang2">{cms:config name="site.telephone"/} </div>
+						  <div class="hang3">官方微博</div>
+						  <div class="hang4"><a href="{cms:config name='site.weibo'/}" target="_blank">@环球官方微博</a></div>
+					   </div>
+					</div>
+					<div class="col-xs-4">
+						<div class="kefu2">
+						  <div class="hang1">微信客服</div>
+						  <div class="hang2">
+							<img src="/uploads/20200421/75e25f0409041e717c13adfe0fc8a75e.jpg" width="84" height="84" alt="">
+						  </div>
+					   </div>
+					</div>
+				</div>
+				
+            </div>
+        </div>
+    </div>
+</footer>
+<!--
+<div id="floatbtn">
+    
+
+    {if isset($config.wxapp)&&$config.wxapp}
+    <a href="javascript:;">
+        <i class="iconfont icon-wxapp"></i>
+        <div class="floatbtn-wrapper">
+            <div class="qrcode"><img src="{$config.wxapp|cdnurl}"></div>
+            <p>微信小程序</p>
+            <p>微信扫一扫体验</p>
+        </div>
+    </a>
+    {/if}
+
+    <a class="hover" href="{:url('index/cms.archives/post', '', false, $Think.config.url_domain_deploy?'www':'')}" target="_blank">
+        <i class="iconfont icon-pencil"></i>
+        <em>立即<br>投稿</em>
+    </a>
+
+    {if $config.qrcode}
+    <a href="javascript:;">
+        <i class="iconfont icon-qrcode"></i>
+        <div class="floatbtn-wrapper">
+            <div class="qrcode"><img src="{$config.qrcode|cdnurl}"></div>
+            <p>微信公众账号</p>
+            <p>微信扫一扫加关注</p>
+        </div>
+    </a>
+    {/if}
+
+    {if isset($__ARCHIVES__)}
+    <a id="feedback" class="hover" href="#comments">
+        <i class="iconfont icon-feedback"></i>
+        <em>发表<br>评论</em>
+    </a>
+    {/if}
+
+    <a id="back-to-top" class="hover" href="javascript:;">
+        <i class="iconfont icon-backtotop"></i>
+        <em>返回<br>顶部</em>
+    </a>
+</div>
+-->
+
+
+<script type="text/javascript" src="__CDN__/assets/libs/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="__CDN__/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__CDN__/assets/libs/fastadmin-layer/dist/layer.js"></script>
+<script type="text/javascript" src="__CDN__/assets/libs/art-template/dist/template-native.js"></script>
+<script type="text/javascript" src="__ADDON__/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="__ADDON__/js/swiper.min.js"></script>
+<script type="text/javascript" src="__ADDON__/js/cms.js?r={$site.version}"></script>
+<script type="text/javascript" src="__ADDON__/js/index.js?r={$site.version}"></script>
+<script type="text/javascript" src="__ADDON__/js/common.js?r={$site.version}"></script>
+<script type="text/javascript" src="__CDN__/assets/libs/nice-validator/dist/jquery.validator.min.js"></script>
+
+{__SCRIPT__}
+
+</body>
+</html>
